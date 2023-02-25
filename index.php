@@ -31,8 +31,10 @@
 		echo "
 		<div class='section'>
 			<h3>GEOIP</h3>
-			".$geoip." IS A RESERVED ADDRESS!<br><br>
-			Check your own address on the API: <a href='https://geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."'>geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."</a>
+			<center>
+				".$geoip." IS A RESERVED ADDRESS!<br><br>
+				Check your own address on the API: <a href='https://geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."'>geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."</a><br><br>
+			</center>
 		</div>";
 	} else {
 
@@ -79,7 +81,7 @@
 							<div class='simple-div-table-col left'>longitude</a>&nbsp;</div><div class='simple-div-table-col right'>".$row['longitude']."&nbsp;</div>
 						</div>
 						<div class='simple-div-table-row'>
-							<div class='simple-div-table-col left'>accuracy_radius</a>&nbsp;</div><div class='simple-div-table-col right'>".$row['accuracy_radius'].$km."</div>
+							<div class='simple-div-table-col left'>accuracy_radius</a>&nbsp;</div><div class='simple-div-table-col right'>".$row['accuracy_radius'].$km."&nbsp;</div>
 						</div>
 						<div class='simple-div-table-row'>
 							<div class='simple-div-table-col left'>locale_code</a>&nbsp;</div><div class='simple-div-table-col right'>".$row['locale_code']."&nbsp;</div>
@@ -124,7 +126,7 @@
 							<div class='simple-div-table-col left'>time_zone</a>&nbsp;</div><div class='simple-div-table-col right'>".$row['time_zone']."&nbsp;</div>
 						</div>
 						<div class='simple-div-table-row'>
-							<div class='simple-div-table-col left'>is_in_european_union</a>&nbsp;</div><div class='simple-div-table-col right'>".$eu."</div>
+							<div class='simple-div-table-col left'>is_in_european_union</a>&nbsp;</div><div class='simple-div-table-col right'>".$eu."&nbsp;</div>
 						</div>";
 		}
 
@@ -142,7 +144,6 @@
 		<div class='section'>
 			<center>
 				API: <a href='https://geoip.dynu.net/api/".$geoip."'>geoip.dynu.net/api/".$geoip."</a>
-				<br><br><span style='font-size:0.6em;text-align:center;'>Powered by <a href='https://www.maxmind.com/'>MaxMind</a> data</span><br><br>
 			</center>
 		</div>
 
@@ -162,12 +163,14 @@
 
 	echo "
 		<div class='footer'>
-			Copyright 2023 Pálinkás Jó Reggelt";
+			Pálinkás jó reggelt kívánok!<br>
+			Powered by <a href='https://www.maxmind.com/'>MaxMind</a> data";
 
 		(int)$versionGitHub = file_get_contents('https://raw.githubusercontent.com/palinkas-jo-reggelt/hMailServer_DynRBLWL/main/VERSION');
 		(int)$versionLocal = file_get_contents('VERSION');
 		if ($versionLocal < $versionGitHub) {
-			echo "<br><br>Upgrade to version ".$versionGitHub." available at <a href='https://github.com/palinkas-jo-reggelt/GeoIP_Server'>GitHub</a>";
+			echo "
+			<br><br>Upgrade to version ".str_pad($versionGitHub,3,'0',STR_PAD_LEFT)." available at <a href='https://github.com/palinkas-jo-reggelt/GeoIP_Server'>GitHub</a>";
 		}
 
 	echo "
