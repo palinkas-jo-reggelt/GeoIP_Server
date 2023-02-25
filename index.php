@@ -28,7 +28,12 @@
 	<div class='wrapper'>";
 
 	if (isPrivateOrLoopback($geoip)) {
-		echo $geoip." IS A RESERVED ADDRESS!<br><br>Check your own address on the API: <a href='https://geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."' target='_blank'>geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."</a>";
+		echo "
+		<div class='section'>
+			<h3>GEOIP</h3>
+			".$geoip." IS A RESERVED ADDRESS!<br><br>
+			Check your own address on the API: <a href='https://geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."'>geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."</a>
+		</div>";
 	} else {
 
 		$sql = $pdo->prepare("
@@ -134,27 +139,40 @@
 			</div>
 			<div class='clear'></div>
 		</div>
-		<center>
-			API: <a href='https://geoip.dynu.net/api/".$geoip."'>geoip.dynu.net/api/".$geoip."</a>
-			<br><br><span style='font-size:0.6em;text-align:center;'>Powered by <a href='https://www.maxmind.com/'>MaxMind</a> data</span><br><br>
-		</center>
-	</div>
+		<div class='section'>
+			<center>
+				API: <a href='https://geoip.dynu.net/api/".$geoip."'>geoip.dynu.net/api/".$geoip."</a>
+				<br><br><span style='font-size:0.6em;text-align:center;'>Powered by <a href='https://www.maxmind.com/'>MaxMind</a> data</span><br><br>
+			</center>
+		</div>
 
-	<script src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js'></script>
-	<script>
-		var element = document.getElementById('map');
-		var map = L.map(element);
-		L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-			attribution: \"&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors\"
-		}).addTo(map);
-		var target = L.latLng('".$latitude."', '".$longitude."');
-		map.setView(target, 10);
-		L.marker(target).addTo(map); 
-	</script>";
-
-	}		
+		<script src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js'></script>
+		<script>
+			var element = document.getElementById('map');
+			var map = L.map(element);
+			L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				attribution: \"&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors\"
+			}).addTo(map);
+			var target = L.latLng('".$latitude."', '".$longitude."');
+			map.setView(target, 10);
+			L.marker(target).addTo(map); 
+		</script>";
+		
+	}
 
 	echo "
+		<div class='footer'>
+			Copyright 2023 Pálinkás Jó Reggelt";
+
+		(int)$versionGitHub = file_get_contents('https://raw.githubusercontent.com/palinkas-jo-reggelt/hMailServer_DynRBLWL/main/VERSION');
+		(int)$versionLocal = file_get_contents('VERSION');
+		if ($versionLocal < $versionGitHub) {
+			echo "<br><br>Upgrade to version ".$versionGitHub." available at <a href='https://github.com/palinkas-jo-reggelt/GeoIP_Server'>GitHub</a>";
+		}
+
+	echo "
+		</div>
+	</div>
 </body>
 </html>";
 
