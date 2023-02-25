@@ -1,0 +1,10 @@
+# Ignore config file & testing files
+/config.php
+/test*
+
+# Ignoring directories
+# Both the directory itself and its contents will be ignored.
+uploads/
+photos/
+tmp/
+giveout/

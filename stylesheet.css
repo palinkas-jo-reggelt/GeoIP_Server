@@ -1,0 +1,138 @@
+body {
+	background: #fefefe;
+	font-family: "Roboto";
+	font-size: 12pt;
+}
+
+a:link, a:active, a:visited {
+	color: #FF0000;
+	text-transform: underline;
+}
+
+a:hover {
+	color: #FF0000;
+	text-transform: none;
+}
+
+.wrapper {
+	max-width: 900px;
+	position: relative;
+	margin: auto;
+	/* padding-top: 10px; */
+}
+
+.section {
+	padding: 5px 0 15px 0;
+	/* margin: 10px; */
+	display: block;
+	/* border: 1px dashed #ccc; */
+	/* border-radius: 20px; */
+}
+
+.section a:link, a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+.section a:hover, a:active {
+	color: red;
+	text-decoration: underline;
+}
+
+.section h2 {
+	font-size:16px;
+    font-weight:bold;
+	text-align:left;
+}
+
+.section h3 {
+	font-size:25px;
+    font-weight:bold;
+	text-align:center;
+}
+
+.secleft {
+	float: left;
+	width: 50%;
+	display: block;
+}
+
+.secright {
+	float: right;
+	width: 50%;
+	display: block;
+}
+
+.secinner{
+	box-sizing: border-box;
+	padding: 0 5px 5px 5px;
+}
+
+#map {
+	max-width: 450px;
+	width: calc(100vw-10px);
+	height: 50vh;
+}
+
+.clear {
+	clear: both;
+}
+
+/* ###  SIMPLE TABLE CSS  ### */
+.simple-div-table {
+	display: table;
+	width: 100%;
+	font-size: 0.8em;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.simple-div-table-row-header {
+	display: table-row;
+	font-weight: bold;
+	text-align: center;
+	background: yellow;
+}
+
+.simple-div-table-row {
+	display: table-row;
+}
+
+.simple-div-table-row:nth-of-type(even) { 
+	background: #eee; 
+	border: 1px solid #ccc; 
+}
+
+.simple-div-table-col {
+	display: table-cell;
+	padding: 3px;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+.left {
+	text-align: left;
+}
+
+@media only screen and (max-width: 380px) {
+	.wrapper {
+		/* width: 345px; */
+	}
+	.secleft {
+		float: none;
+		width: 100%;
+	}
+	.secright {
+		float: none;
+		margin: 0px;
+		width: 100% ;
+	}
+}
