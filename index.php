@@ -144,7 +144,7 @@
 		</div>
 		<div class='section'>
 			<center>
-				API: <a href='https://geoip.dynu.net/api/".$geoip."'>geoip.dynu.net/api/".$geoip."</a>
+				API: <a href='".$base_url."/api/".$geoip."'>".preg_replace("/https?:\/\//","",$base_url)."/api/".$geoip."</a>
 			</center>
 		</div>
 
@@ -171,7 +171,7 @@
 		(int)$versionLocal = file_get_contents('VERSION');
 		if ($versionLocal < $versionGitHub) {
 			echo "
-			<br><br>Upgrade to version ".str_pad(trim($versionGitHub),3,'0',STR_PAD_LEFT)." available at <a href='https://github.com/palinkas-jo-reggelt/GeoIP_Server'>GitHub</a>";
+			<br><br>Upgrade to version ".str_pad(trim($versionGitHub),3,'0',STR_PAD_LEFT)." available at <a target='_blank' href='https://github.com/palinkas-jo-reggelt/GeoIP_Server'>GitHub</a>";
 		}
 
 	echo "
