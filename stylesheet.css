@@ -75,6 +75,7 @@ a:hover {
 }
 
 .footer {
+	line-height: 1.5em;
 	text-align: center;
 	font-size: 0.6em;
 }

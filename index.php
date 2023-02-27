@@ -34,22 +34,10 @@
 			<h3>GEOIP</h3>
 			<center>
 				".$geoip." IS A RESERVED ADDRESS!<br><br>
-				Check your own address on the API: <a href='".$base_url."/".$_SERVER['REMOTE_ADDR']."'>".preg_replace("/https?:\/\//","",$base_url)."/api/".$_SERVER['REMOTE_ADDR']."</a><br><br>
+				Check your own address: <a href='".$base_url."/map/".$_SERVER['REMOTE_ADDR']."'>".preg_replace("/https?:\/\//","",$base_url)."/map/".$_SERVER['REMOTE_ADDR']."</a><br><br>
 			</center>
 		</div>";
 	} else {
-
-		$sql = $pdo->prepare("
-			SELECT * 
-			FROM (
-				SELECT * 
-				FROM ".$Database['table_city']." 
-				WHERE INET6_ATON('".$geoip."') <= network_end LIMIT 1
-			) AS a 
-			INNER JOIN ".$Database['table_loc']." AS b ON a.geoname_id = b.geoname_id 
-			WHERE network_start <= INET6_ATON('".$geoip."');
-		");
-		$sql->execute();
 
 		echo "	
 		<div class='section'>
@@ -62,6 +50,16 @@
 							<div class='simple-div-table-col'>Value</div>
 						</div>";
 
+		$sql = $pdo->prepare("
+			SELECT * 
+			FROM (
+				SELECT * 
+				FROM ".$Database['table_city']." 
+				WHERE INET6_ATON('".$geoip."') <= network_end LIMIT 1
+			) AS a 
+			INNER JOIN ".$Database['table_loc']." AS b ON a.geoname_id = b.geoname_id 
+			WHERE network_start <= INET6_ATON('".$geoip."');
+		");
 		$sql->execute();
 		while($row = $sql->fetch(PDO::FETCH_ASSOC)){
 			$latitude = $row['latitude'];
@@ -165,7 +163,8 @@
 	echo "
 		<div class='footer'>
 			Pálinkás jó reggelt kívánok!<br>
-			Powered by <a href='https://www.maxmind.com/'>MaxMind</a> data";
+			Powered by <a href='https://www.maxmind.com/'>MaxMind</a> data<br>
+			Build your own <a href='https://github.com/palinkas-jo-reggelt/GeoIP_Server'>GeoIP Server</a>";
 
 		(int)$versionGitHub = file_get_contents('https://raw.githubusercontent.com/palinkas-jo-reggelt/GeoIP_Server/main/VERSION');
 		(int)$versionLocal = file_get_contents('VERSION');
