@@ -1,5 +1,6 @@
 <?php
 	include_once('./config.php');
+	include_once('./functions.php');
 
 	if (isset($_GET['geoip'])) {
 		if (preg_match($regexIP,$_GET['geoip'])) {
@@ -33,7 +34,7 @@
 			<h3>GEOIP</h3>
 			<center>
 				".$geoip." IS A RESERVED ADDRESS!<br><br>
-				Check your own address on the API: <a href='https://geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."'>geoip.dynu.net/api/".$_SERVER['REMOTE_ADDR']."</a><br><br>
+				Check your own address on the API: <a href='".$base_url."/".$_SERVER['REMOTE_ADDR']."'>".preg_replace("/https?:\/\//","",$base_url)."/api/".$_SERVER['REMOTE_ADDR']."</a><br><br>
 			</center>
 		</div>";
 	} else {
@@ -166,11 +167,11 @@
 			Pálinkás jó reggelt kívánok!<br>
 			Powered by <a href='https://www.maxmind.com/'>MaxMind</a> data";
 
-		(int)$versionGitHub = file_get_contents('https://raw.githubusercontent.com/palinkas-jo-reggelt/hMailServer_DynRBLWL/main/VERSION');
+		(int)$versionGitHub = file_get_contents('https://raw.githubusercontent.com/palinkas-jo-reggelt/GeoIP_Server/main/VERSION');
 		(int)$versionLocal = file_get_contents('VERSION');
 		if ($versionLocal < $versionGitHub) {
 			echo "
-			<br><br>Upgrade to version ".str_pad($versionGitHub,3,'0',STR_PAD_LEFT)." available at <a href='https://github.com/palinkas-jo-reggelt/GeoIP_Server'>GitHub</a>";
+			<br><br>Upgrade to version ".str_pad(trim($versionGitHub),3,'0',STR_PAD_LEFT)." available at <a href='https://github.com/palinkas-jo-reggelt/GeoIP_Server'>GitHub</a>";
 		}
 
 	echo "

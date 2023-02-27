@@ -1,5 +1,6 @@
 <?php
 	include_once('./config.php');
+	include_once('./functions.php');
 
 	if (isset($_GET['geoip'])) {
 		if ((filter_var($_GET['geoip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) || (filter_var($_GET['geoip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6))) {
