@@ -57,7 +57,7 @@
 			$rowsReturned = $sql->rowCount();
 			if ($rowsReturned > 0) {
 				header('Content-Type: application/json; charset=utf-8');
-				echo json_encode($json);
+				echo json_encode($json, JSON_PRETTY_PRINT);
 			} else {
 				$json = array(
 					'status'=>404, 
@@ -70,7 +70,7 @@
 					)
 				);
 				header('Content-Type: application/json; charset=utf-8');
-				echo json_encode($json);
+				echo json_encode($json, JSON_PRETTY_PRINT);
 			}
 		} else {
 			$json = array(
@@ -84,7 +84,7 @@
 				)
 			);
 			header('Content-Type: application/json; charset=utf-8');
-			echo json_encode($json);
+			echo json_encode($json, JSON_PRETTY_PRINT);
 		}
 	} else {
 		$json = array(
@@ -98,7 +98,7 @@
 			)
 		);
 		header('Content-Type: application/json; charset=utf-8');
-		echo json_encode($json);
+		echo json_encode($json, JSON_PRETTY_PRINT);
 	}
 
 ?>
