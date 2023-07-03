@@ -167,9 +167,9 @@
 			</center>
 		</div>
 
-		// https://stackoverflow.com/questions/50258902/how-to-zoom-area-within-15km-radius-from-the-marker
 		<script src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js'></script>
 		<script>
+			// https://stackoverflow.com/questions/50258902/how-to-zoom-area-within-15km-radius-from-the-marker
 			// Create the map
 			var map = L.map('map').setView([".$latitude.", ".$longitude."], 12);
 
@@ -185,50 +185,15 @@
 			var lng = ".$longitude.";
 			var marker = L.marker([lat, lng]).addTo(map); // accuracy radius in meters.
 			var radius = ".($accuracy_radius * 1000)."; 
-			var circle = L.circle([lat, lng], radius).addTo(map);
-
-			// add a layer and add points
-			var myLayer = L.geoJson().addTo(map);
-
-			// geojsonFeature
-			var geojsonFeature = {
-				'type': 'IP Address',
-				'properties': {
-					'IP': '".$geoip."',
-					'popupContent': 'Accuracy Radius: ".$accuracy_radius."'
-				},
-				'geometry': {
-					'type': 'Point',
-					'coordinates': [".$latitude.", ".$longitude."]
-				}
+			var circleOptions = {
+				stroke: true,
+				weight: 0.5,
+				// color: 'blue',
+				// fillColor: '#0000ff',
+				// fillOpacity: 0.10
 			};
-
-			// put the marker
-			setTimeout(function() {
-				myLayer.addData(geojsonFeature);
-			}, 1000);
-
-			// update the marker
-			setTimeout(function() {
-				// clear layer
-				myLayer.clearLayers(); // inherited from LayerGroup
-				//myLayer.addData(geojsonFeature);
-			}, 3000);
-
-			// put the marker
-			setTimeout(function() {
-				myLayer.addData(geojsonFeature);
-			}, 5000);
-
-			// just fooling around
-			setInterval(function() {
-				lat = lat + ((Math.random() * 1) - 0.25) * 0.001;
-				lng = lng + ((Math.random() * 1) - 0.5) * 0.001;
-				var newLatLng = [lat, lng];
-				marker.setLatLng(newLatLng).update();
-				circle.setLatLng(newLatLng);
-				map.fitBounds(circle.getBounds());
-			}, 200);
+			var circle = L.circle([lat, lng], radius, circleOptions).addTo(map);
+			map.fitBounds(circle.getBounds());
 		</script>";
 	}
 
